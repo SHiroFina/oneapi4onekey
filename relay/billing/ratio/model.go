@@ -334,9 +334,12 @@ var ModelRatio = map[string]float64{
 	"command-light-nightly": 0.5,
 	"command-r":             0.5 / 1000 * USD,
 	"command-r-plus":        3.0 / 1000 * USD,
-	// https://platform.deepseek.com/api-docs/pricing/
-	"deepseek-chat":     0.14 * MILLI_USD,
-	"deepseek-reasoner": 0.55 * MILLI_USD,
+	// https://api-docs.deepseek.com/zh-cn/quick_start/pricing
+	// deepseek-chat / deepseek-reasoner 将于 2026/07/24 弃用，对应 v4-flash 非思考/思考模式
+	// 官方: ¥1/M 输入, ¥2/M 输出 → 用户收取 1.5 倍: ¥1.5/M 输入, ¥3/M 输出
+	"deepseek-chat":     1.5 / USD2RMB * MILLI_USD,
+	"deepseek-reasoner": 1.5 / USD2RMB * MILLI_USD,
+	"deepseek-v4-flash": 1.5 / USD2RMB * MILLI_USD,
 	// https://www.deepl.com/pro?cta=header-prices
 	"deepl-zh": 25.0 / 1000 * USD,
 	"deepl-en": 25.0 / 1000 * USD,
@@ -630,6 +633,7 @@ var CompletionRatio = map[string]float64{
 	// deepseek
 	"deepseek-chat":     0.28 / 0.14,
 	"deepseek-reasoner": 2.19 / 0.55,
+	"deepseek-v4-flash": 3.0 / 1.5,
 }
 
 var (

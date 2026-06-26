@@ -146,20 +146,22 @@ func (user *User) Insert(ctx context.Context, inviterId int) error {
 		}
 	}
 	// create default token
+	deepseekModels := "deepseek-v4-flash"
 	cleanToken := Token{
 		UserId:         user.Id,
-		Name:           "default",
+		Name:           "deepseek",
 		Key:            random.GenerateKey(),
 		CreatedTime:    helper.GetTimestamp(),
 		AccessedTime:   helper.GetTimestamp(),
 		ExpiredTime:    -1,
 		RemainQuota:    -1,
 		UnlimitedQuota: true,
+		Models:         &deepseekModels,
 	}
 	result.Error = cleanToken.Insert()
 	if result.Error != nil {
 		// do not block
-		logger.SysError(fmt.Sprintf("create default token for user %d failed: %s", user.Id, result.Error.Error()))
+		logger.SysError(fmt.Sprintf("create deepseek token for user %d failed: %s", user.Id, result.Error.Error()))
 	}
 	return nil
 }
